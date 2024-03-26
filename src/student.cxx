@@ -23,4 +23,13 @@ class Student{
         void get_academics(){
             ;
         }
+
+        void delete_info(int studentId){
+            if (studentId != id){
+                cout << "Invalid ID\n";
+            }else if(studentId == id){
+                 id = 0;
+                 
+            }
+        }
 };
