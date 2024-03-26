@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <iostream>
 #include <fstream>
+#include "course.h"
 using namespace std;
 HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 
@@ -68,7 +69,7 @@ public:
         studentData << "\n";
     }
 
-    void get_academics()
+    void get_academics(Course *cs)
     {
         ;
     }

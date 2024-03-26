@@ -4,8 +4,6 @@
 #include "src/student.h"
 using namespace std;
 
-// extern class Student;
-// extern class Course;
 
 int main(){
 
