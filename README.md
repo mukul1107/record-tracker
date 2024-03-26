@@ -4,7 +4,7 @@
 
 ## Key Features
 
-- [ ] **Add Students:** Add new students to the system with unique identifiers.
+- [x] **Add Students:** Add new students to the system with unique identifiers.
 - [ ] **Edit Students:** Modify student information, such as names or IDs.
 - [ ] **Add Courses:** Create new courses and assign them to students.
 - [ ] **Edit Courses:** Update course details, such as names or credits.
