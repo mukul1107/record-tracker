@@ -1,3 +1,8 @@
+// student.h
+
+#ifndef STUDENT_H
+#define STUDENT_H
+
 #include <iostream>
 using namespace std;
 
@@ -7,6 +12,13 @@ class Student{
         int id;
 
     public:
+
+        
+        Student(int stdId, string stdName, string cs){
+            id = stdId;
+            name = stdName;
+            course = cs;
+        }
         void get_info(){
             cout << "Student's Name is: "<< name <<"." <<endl;
             cout << "Student's ID is: "<< id <<"." <<endl;
@@ -33,3 +45,5 @@ class Student{
             }
         }
 };
+
+#endif
