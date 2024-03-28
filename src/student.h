@@ -1,5 +1,3 @@
-// student.h
-
 #ifndef STUDENT_H
 #define STUDENT_H
 
@@ -7,82 +5,112 @@
 #include <iostream>
 #include <fstream>
 #include "course.h"
-using namespace std;
-HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
-void txtRed()
-{
-    SetConsoleTextAttribute(hConsole, FOREGROUND_RED);
-}
-void txtGreen()
-{
-    SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-}
-void txtWhite()
-{
-    SetConsoleTextAttribute(hConsole, FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
-}
 
 class Student
 {
 private:
-    string name, course;
-    int id;
+    string names[5];
+    string courses[5];
+    int ids[5];
+
+    // Console color manipulation functions
+    void txtRed()
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED);
+    }
+
+    void txtGreen()
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_GREEN);
+    }
+
+    void txtWhite()
+    {
+        SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), FOREGROUND_RED | FOREGROUND_BLUE | FOREGROUND_GREEN);
+    }
 
 public:
-    Student()
-    {
-        ;
-    }
+    // Default constructor
+    Student() {}
+
+    // Parameterized constructor
     Student(int stdId, string stdName, string cs)
     {
-        id = stdId;
-        name = stdName;
-        course = cs;
+        // Initialize all elements of arrays to the same values
+        for (int i = 0; i < 5; ++i) {
+            ids[i] = stdId;
+            names[i] = stdName;
+            courses[i] = cs;
+        }
     }
+
     void get_info()
     {
-        cout << "Student's Name is: ";
         txtGreen();
-
-        cout << name << endl;
+        cout << "Student Information:\n";
         txtWhite();
-        cout << "Student's ID is: ";
-
-        txtGreen();
-        cout << id << endl;
-        cout << name;
-        txtWhite();
-        cout << " is registered in: " << course << "." << endl;
+        for (int i = 0; i < 5; ++i) {
+            cout << "Student " << i+1 << ":\n";
+            txtGreen();
+            cout << "Name: " << names[i] << endl;
+            cout << "ID: " << ids[i] << endl;
+            cout << "Course: " << courses[i] << endl;
+            txtWhite();
+            cout << endl;
+        }
     }
 
     void set_info(int roll, string uName, string cour)
     {
-        roll = id;
-        name = uName;
-        course = cour;
+        // Assign values to each element of the arrays
+        for (int i = 0; i < 5; ++i) {
+            ids[i] = roll;
+            names[i] = uName;
+            courses[i] = cour;
+        }
 
-        ofstream studentData;
-        studentData.open("data.txt", ios::app);
-
-        studentData << name <<" " << course << " " << id << endl;
-        studentData << "\n";
+        // Open the file in append mode
+        ofstream studentData("data.txt", ios::app);
+        if (studentData.is_open())
+        {
+            // Write data for each student to the file
+            for (int i = 0; i < 5; ++i) {
+                studentData << names[i] << " " << courses[i] << " " << ids[i] << endl;
+            }
+            studentData << endl;
+            studentData.close();
+        }
+        else
+        {
+            cout << "Unable to open file!" << endl;
+        }
     }
 
     void get_academics(Course *cs)
     {
-        ;
+        txtGreen();
+        cout << "get_academics() is on development right now!\n";
+        txtWhite();
+        // for (int i = 0; i < 5; ++i) {
+        //     cout << "Student " << i+1 << ":\n";
+        //     for (int j = 0; j < 5; ++j) {
+        //         cout << "Course: " << cs[j].getName() << endl;
+        //         // Assuming get_grades() method returns a string
+        //         cout << "Grades: " << cs[j].get_grades() << endl;
+        //     }
+        //     cout << endl;
+        // }
     }
 
     void delete_info(int studentId)
     {
-        if (studentId != id)
-        {
-            cout << "Invalid ID\n";
-        }
-        else if (studentId == id)
-        {
-            id = 0;
+        for (int i = 0; i < 5; ++i) {
+            if (studentId == ids[i])
+            {
+                // Set the ID to 0 to mark as deleted
+                ids[i] = 0;
+                break;  // Assuming each ID is unique, no need to continue the loop
+            }
         }
     }
 };
